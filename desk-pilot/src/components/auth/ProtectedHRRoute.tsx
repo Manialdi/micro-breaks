@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 
 export const ProtectedHRRoute = ({ children }: { children?: React.ReactNode }) => {
@@ -25,7 +25,7 @@ export const ProtectedHRRoute = ({ children }: { children?: React.ReactNode }) =
             // Note: We should ideally check the 'users' table for source of truth, 
             // but for performance, checking metadata (if synced) or just the table is fine.
             // Let's check the table to be 100% strict as per "Strict access control"
-            const { data: _user } = await supabase
+            const { data: user } = await supabase
                 .from('users')
                 .select('role')
                 .eq('id', session.user.id)
