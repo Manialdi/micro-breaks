@@ -184,6 +184,76 @@ export const Landing = () => {
                     </div>
                 </div>
             </div>
+
+            {/* How It Works Section */}
+            <div style={{ marginTop: '8rem', paddingBottom: '4rem', textAlign: 'center' }}>
+                <h2 style={{
+                    fontSize: '2.5rem',
+                    fontWeight: 800,
+                    color: 'var(--text-main)',
+                    marginBottom: '4rem',
+                    maxWidth: '800px',
+                    marginLeft: 'auto',
+                    marginRight: 'auto'
+                }}>
+                    Tiny breaks, big impact — in three simple steps.
+                </h2>
+
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                    gap: '3rem',
+                    textAlign: 'left'
+                }}>
+                    {/* Step 1 */}
+                    <div>
+                        <div style={{
+                            fontSize: '4rem',
+                            fontWeight: 800,
+                            color: '#ecfdf5',
+                            lineHeight: 1,
+                            marginBottom: '1rem',
+                            WebkitTextStroke: '2px #059669'
+                        }}>01</div>
+                        <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem', color: 'var(--text-main)' }}>Set up your team</h3>
+                        <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', lineHeight: 1.6 }}>
+                            HR or team leads invite employees, set default break frequency, and choose the initial exercise sets.
+                        </p>
+                    </div>
+
+                    {/* Step 2 */}
+                    <div>
+                        <div style={{
+                            fontSize: '4rem',
+                            fontWeight: 800,
+                            color: '#eff6ff',
+                            lineHeight: 1,
+                            marginBottom: '1rem',
+                            WebkitTextStroke: '2px #2563eb'
+                        }}>02</div>
+                        <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem', color: 'var(--text-main)' }}>Employees get gentle reminders</h3>
+                        <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', lineHeight: 1.6 }}>
+                            Friendly, non-intrusive nudges on Chrome or mobile guide employees to take quick 2-minute breaks.
+                        </p>
+                    </div>
+
+                    {/* Step 3 */}
+                    <div>
+                        <div style={{
+                            fontSize: '4rem',
+                            fontWeight: 800,
+                            color: '#fdf4ff',
+                            lineHeight: 1,
+                            marginBottom: '1rem',
+                            WebkitTextStroke: '2px #db2777'
+                        }}>03</div>
+                        <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem', color: 'var(--text-main)' }}>Track usage & wellbeing</h3>
+                        <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', lineHeight: 1.6 }}>
+                            HR sees participation, trends, and wellness signals to measure impact and adjust cadence.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
