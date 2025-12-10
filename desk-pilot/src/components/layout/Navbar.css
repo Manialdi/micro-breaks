@@ -1,7 +1,7 @@
 .navbar {
     background-color: white;
     border-bottom: 1px solid var(--border);
-    height: 64px;
+    height: 80px;
     display: flex;
     align-items: center;
     position: sticky;

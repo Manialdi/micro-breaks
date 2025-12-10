@@ -21,7 +21,8 @@ export const Navbar = () => {
         <header className="navbar">
             <div className="navbar-container">
                 <Link to="/" className="navbar-logo">
-                    <img src="/logo.png" alt="Micro-Breaks" style={{ height: '32px', width: 'auto' }} />
+                    <img src="/logo.png" alt="Micro-Breaks" style={{ height: '60px', width: 'auto' }} />
+                    <span style={{ fontSize: '1.5rem', color: 'var(--text-main)' }}>Micro-Breaks</span>
                 </Link>
 
                 <nav className="navbar-links">
