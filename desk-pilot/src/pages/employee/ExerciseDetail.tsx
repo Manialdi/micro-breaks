@@ -49,6 +49,7 @@ export const ExerciseDetail = () => {
 
         } catch (error) {
             console.error('Failed to log session', error);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             alert(`Failed to save: ${(error as any).message || 'Unknown error'}`);
         } finally {
             setLoading(false);

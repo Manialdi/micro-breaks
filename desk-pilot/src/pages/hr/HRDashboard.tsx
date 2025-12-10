@@ -6,6 +6,16 @@ import { Input } from '../../components/common/Input';
 import { dbService } from '../../services/databaseService';
 import { supabase } from '../../lib/supabase';
 
+interface EmployeeStats {
+    id: string;
+    name: string;
+    email: string;
+    status: string;
+    sessionsToday: number;
+    sessionsWeek: number;
+    streak: number;
+}
+
 export const HRDashboard = () => {
     const [loading, setLoading] = useState(true);
     const [metrics, setMetrics] = useState({
@@ -14,7 +24,7 @@ export const HRDashboard = () => {
         sessionsToday: 0,
         participationRate: 0
     });
-    const [tableData, setTableData] = useState<any[]>([]);
+    const [tableData, setTableData] = useState<EmployeeStats[]>([]);
     const [filter, setFilter] = useState('');
 
     useEffect(() => {

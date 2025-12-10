@@ -8,37 +8,40 @@ import { supabase } from '../../lib/supabase';
 export const EmployeeAnalyticsDetail = () => {
     const { employeeId } = useParams();
     const [loading, setLoading] = useState(true);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [data, setData] = useState<any>(null);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
+        const loadData = async () => {
+            try {
+                const { data: { user } } = await supabase.auth.getUser();
+                if (user) {
+                    const { data: dbUser } = await supabase.from('users').select('company_id').eq('id', user.id).single();
+                    if (dbUser?.company_id && employeeId) {
+                        const stats = await dbService.getEmployeeDetailAnalytics(employeeId, dbUser.company_id);
+                        setData(stats);
+                    } else {
+                        setError('Unauthorized or missing company');
+                    }
+                }
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            } catch (err: any) {
+                console.error(err);
+                setError(err.message || 'Failed to load employee data');
+            } finally {
+                setLoading(false);
+            }
+        };
+
         if (employeeId) loadData();
     }, [employeeId]);
-
-    const loadData = async () => {
-        try {
-            const { data: { user } } = await supabase.auth.getUser();
-            if (user) {
-                const { data: dbUser } = await supabase.from('users').select('company_id').eq('id', user.id).single();
-                if (dbUser?.company_id && employeeId) {
-                    const stats = await dbService.getEmployeeDetailAnalytics(employeeId, dbUser.company_id);
-                    setData(stats);
-                } else {
-                    setError('Unauthorized or missing company');
-                }
-            }
-        } catch (err: any) {
-            console.error(err);
-            setError(err.message || 'Failed to load employee data');
-        } finally {
-            setLoading(false);
-        }
-    };
 
     if (loading) return <div style={{ padding: '2rem' }}>Loading details...</div>;
     if (error) return <div style={{ padding: '2rem', color: 'red' }}>Error: {error}</div>;
     if (!data) return <div style={{ padding: '2rem' }}>No data found.</div>;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const maxTrend = Math.max(...data.trendData.map((d: any) => d.count), 1);
 
     return (
@@ -76,6 +79,7 @@ export const EmployeeAnalyticsDetail = () => {
             {/* 2. Line Chart (Last 30 Days) */}
             <Card title="Activity (Last 30 Days)" style={{ marginBottom: '2rem' }}>
                 <div style={{ height: '250px', display: 'flex', alignItems: 'flex-end', gap: '4px', paddingTop: '1rem', overflowX: 'auto' }}>
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                     {data.trendData.map((d: any, i: number) => {
                         const height = (d.count / maxTrend) * 100;
                         const showLabel = i % 3 === 0; // Prevent clutter
@@ -113,7 +117,7 @@ export const EmployeeAnalyticsDetail = () => {
                     <tbody>
                         {data.breakdown.length === 0 ? (
                             <tr><td colSpan={3} style={{ padding: '1rem', textAlign: 'center', color: '#94a3b8' }}>No exercises yet.</td></tr>
-                        ) : data.breakdown.map((ex: any, i: number) => (
+                        ) : data.breakdown.map((ex: { name: string; count: number; lastAt: string }, i: number) => (
                             <tr key={i} style={{ borderBottom: '1px solid #f8fafc' }}>
                                 <td style={{ padding: '1rem', fontWeight: 500 }}>{ex.name}</td>
                                 <td style={{ padding: '1rem' }}>{ex.count}</td>

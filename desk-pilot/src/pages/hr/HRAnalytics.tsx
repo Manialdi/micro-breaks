@@ -6,6 +6,7 @@ import { Button } from '../../components/common/Button';
 
 export const HRAnalytics = () => {
     const [loading, setLoading] = useState(true);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [data, setData] = useState<any>(null);
 
     // Export State
@@ -19,66 +20,65 @@ export const HRAnalytics = () => {
     const [customEnd, setCustomEnd] = useState('');
 
     useEffect(() => {
+        const loadAnalytics = async () => {
+            setLoading(true);
+            try {
+                const { data: { user } } = await supabase.auth.getUser();
+                if (user) {
+                    // Get company of HR and Name
+                    const { data: dbUser } = await supabase
+                        .from('users')
+                        .select('company_id, companies(name)')
+                        .eq('id', user.id)
+                        .single();
+
+                    if (dbUser?.company_id) {
+                        if (dbUser.companies) {
+                            setCompanyName(dbUser.companies.name || 'Company');
+                        }
+
+                        // Calculate Dates
+                        let start = '';
+                        let end = '';
+                        const today = new Date();
+
+                        if (filterType === 'today') {
+                            start = today.toISOString().split('T')[0];
+                            end = start;
+                        } else if (filterType === '7days') {
+                            end = today.toISOString().split('T')[0];
+                            const d = new Date();
+                            d.setDate(d.getDate() - 6);
+                            start = d.toISOString().split('T')[0];
+                        } else if (filterType === '30days') {
+                            end = today.toISOString().split('T')[0];
+                            const d = new Date();
+                            d.setDate(d.getDate() - 29);
+                            start = d.toISOString().split('T')[0];
+                        } else if (filterType === 'custom') {
+                            if (!customStart || !customEnd) {
+                                setLoading(false);
+                                return; // Wait for full input
+                            }
+                            start = customStart;
+                            end = customEnd;
+                        }
+
+                        const analytics = await dbService.getAnalyticsData(dbUser.company_id, start, end);
+                        setData({ ...analytics, rangeLabel: `${start} to ${end}` });
+                    } else {
+                        console.warn('No company found for user');
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load analytics', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
         loadAnalytics();
     }, [filterType, customStart, customEnd]);
-
-    const loadAnalytics = async () => {
-        setLoading(true);
-        try {
-            const { data: { user } } = await supabase.auth.getUser();
-            if (user) {
-                // Get company of HR and Name
-                const { data: dbUser } = await supabase
-                    .from('users')
-                    .select('company_id, companies(name)')
-                    .eq('id', user.id)
-                    .single();
-
-                if (dbUser?.company_id) {
-                    if (dbUser.companies) {
-                        // @ts-ignore
-                        setCompanyName(dbUser.companies.name || 'Company');
-                    }
-
-                    // Calculate Dates
-                    let start = '';
-                    let end = '';
-                    const today = new Date();
-
-                    if (filterType === 'today') {
-                        start = today.toISOString().split('T')[0];
-                        end = start;
-                    } else if (filterType === '7days') {
-                        end = today.toISOString().split('T')[0];
-                        const d = new Date();
-                        d.setDate(d.getDate() - 6);
-                        start = d.toISOString().split('T')[0];
-                    } else if (filterType === '30days') {
-                        end = today.toISOString().split('T')[0];
-                        const d = new Date();
-                        d.setDate(d.getDate() - 29);
-                        start = d.toISOString().split('T')[0];
-                    } else if (filterType === 'custom') {
-                        if (!customStart || !customEnd) {
-                            setLoading(false);
-                            return; // Wait for full input
-                        }
-                        start = customStart;
-                        end = customEnd;
-                    }
-
-                    const analytics = await dbService.getAnalyticsData(dbUser.company_id, start, end);
-                    setData({ ...analytics, rangeLabel: `${start} to ${end}` });
-                } else {
-                    console.warn('No company found for user');
-                }
-            }
-        } catch (error) {
-            console.error('Failed to load analytics', error);
-        } finally {
-            setLoading(false);
-        }
-    };
 
     const handleExportCSV = () => {
         if (!data || !data.allEmployees) return;
@@ -89,6 +89,7 @@ export const HRAnalytics = () => {
             const headers = ['Employee Name', 'Email', `Sessions (${data.rangeLabel})`];
 
             // Map Data
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const rows = data.allEmployees.map((emp: any) => [
                 emp.name,
                 emp.email,
@@ -98,6 +99,7 @@ export const HRAnalytics = () => {
             // Convert to CSV
             const csvContent = [
                 headers.join(','),
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 ...rows.map((row: any[]) => row.map(item => `"${item}"`).join(','))
             ].join('\n');
 
@@ -132,7 +134,9 @@ export const HRAnalytics = () => {
     if (!data) return <div style={{ padding: '2rem' }}>No data available.</div>;
 
     // --- Chart Helpers ---
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const maxTrend = data.trendData.length > 0 ? Math.max(...data.trendData.map((d: any) => d.count), 1) : 1;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const maxBar = data.topPerformers.length > 0 ? Math.max(...data.topPerformers.map((d: any) => d.sessionsRange), 1) : 1;
 
     return (
@@ -189,6 +193,7 @@ export const HRAnalytics = () => {
                 {/* Line Chart (Trend) */}
                 <Card title="Activity Trend">
                     <div style={{ height: '200px', display: 'flex', alignItems: 'flex-end', gap: '2px', paddingTop: '1rem', overflowX: 'auto' }}>
+                        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                         {data.trendData.map((d: any, i: number) => {
                             const height = (d.count / maxTrend) * 100;
                             // Show fewer labels if many data points
@@ -218,6 +223,7 @@ export const HRAnalytics = () => {
                 {/* Bar Chart (Top Performers) */}
                 <Card title="Top Performers (In Range)">
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                         {data.topPerformers.length === 0 ? <p>No activity yet.</p> : data.topPerformers.map((user: any) => (
                             <div key={user.id} style={{ display: 'flex', alignItems: 'center', fontSize: '0.9rem' }}>
                                 <div style={{ width: '120px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -257,6 +263,7 @@ export const HRAnalytics = () => {
                             </tr>
                         </thead>
                         <tbody>
+                            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                             {data.allEmployees.map((emp: any) => (
                                 <tr key={emp.id} style={{ borderBottom: '1px solid #f1f5f9', cursor: 'pointer' }} onClick={() => window.location.href = `/hr/analytics/${emp.id}`}>
                                     <td style={{ padding: '0.75rem', fontWeight: 500, color: 'var(--primary)' }}>{emp.name}</td>

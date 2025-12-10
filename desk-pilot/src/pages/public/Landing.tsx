@@ -254,59 +254,62 @@ export const Landing = () => {
                     </div>
                 </div>
             </div>
+
+
+            {/* Feature Grid Section */}
+            <div style={{ marginTop: '8rem', paddingBottom: '4rem', textAlign: 'center' }}>
+                <h2 style={{
+                    fontSize: '2.5rem',
+                    fontWeight: 800,
+                    color: 'var(--text-main)',
+                    marginBottom: '4rem',
+                    maxWidth: '800px',
+                    marginLeft: 'auto',
+                    marginRight: 'auto'
+                }}>
+                    Everything you need to build better workday habits.
+                </h2>
+
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                    gap: '2rem',
+                    textAlign: 'left'
+                }}>
+                    {/* Feature 1 */}
+                    <div style={{ padding: '2.5rem', background: '#f8fafc', borderRadius: '24px', border: '1px solid var(--border)' }}>
+                        <div style={{ width: '56px', height: '56px', background: 'white', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0f172a', marginBottom: '1.5rem', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
+                            <Bell size={28} />
+                        </div>
+                        <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--text-main)' }}>Smart Break Reminders</h3>
+                        <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', lineHeight: 1.6 }}>
+                            Reminders adapt to your team’s rhythm. Set default schedules or let employees customize. Subtle, respectful, never disruptive.
+                        </p>
+                    </div>
+
+                    {/* Feature 2 */}
+                    <div style={{ padding: '2.5rem', background: '#f8fafc', borderRadius: '24px', border: '1px solid var(--border)' }}>
+                        <div style={{ width: '56px', height: '56px', background: 'white', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0f172a', marginBottom: '1.5rem', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
+                            <PlayCircle size={28} />
+                        </div>
+                        <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--text-main)' }}>2-Minute Guided Exercises</h3>
+                        <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', lineHeight: 1.6 }}>
+                            Simple stretches and resets designed for eyes, neck, shoulders, wrists, and posture. No equipment. No learning curve.
+                        </p>
+                    </div>
+
+                    {/* Feature 3 */}
+                    <div style={{ padding: '2.5rem', background: '#f8fafc', borderRadius: '24px', border: '1px solid var(--border)' }}>
+                        <div style={{ width: '56px', height: '56px', background: 'white', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0f172a', marginBottom: '1.5rem', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
+                            <LayoutDashboard size={28} />
+                        </div>
+                        <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--text-main)' }}>HR Wellness Dashboard</h3>
+                        <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', lineHeight: 1.6 }}>
+                            Understand adoption, participation, and wellbeing trends across teams. Spot burnout risk early with data-backed insights.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-
-            {/* Feature Grid Section */ }
-    <div style={{ marginTop: '8rem', paddingBottom: '4rem', textAlign: 'center' }}>
-        <h2 style={{
-            fontSize: '2.5rem',
-            fontWeight: 800,
-            color: 'var(--text-main)',
-            marginBottom: '4rem',
-            maxWidth: '800px',
-            marginLeft: 'auto',
-            marginRight: 'auto'
-        }}>
-            Everything you need to build better workday habits.
-        </h2>
-
-        <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '2rem',
-            textAlign: 'left'
-        }}>
-            {/* Feature 1 */}
-            <div style={{ padding: '2.5rem', background: '#f8fafc', borderRadius: '24px', border: '1px solid var(--border)' }}>
-                <div style={{ width: '56px', height: '56px', background: 'white', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0f172a', marginBottom: '1.5rem', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
-                    <Bell size={28} />
-                </div>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--text-main)' }}>Smart Break Reminders</h3>
-                <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', lineHeight: 1.6 }}>
-                    Reminders adapt to your team’s rhythm. Set default schedules or let employees customize. Subtle, respectful, never disruptive.
-                </p>
-            </div>
-
-            {/* Feature 2 */}
-            <div style={{ padding: '2.5rem', background: '#f8fafc', borderRadius: '24px', border: '1px solid var(--border)' }}>
-                <div style={{ width: '56px', height: '56px', background: 'white', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0f172a', marginBottom: '1.5rem', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
-                    <PlayCircle size={28} />
-                </div>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--text-main)' }}>2-Minute Guided Exercises</h3>
-                <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', lineHeight: 1.6 }}>
-                    Simple stretches and resets designed for eyes, neck, shoulders, wrists, and posture. No equipment. No learning curve.
-                </p>
-            </div>
-
-            {/* Feature 3 */}
-            <div style={{ padding: '2.5rem', background: '#f8fafc', borderRadius: '24px', border: '1px solid var(--border)' }}>
-                <div style={{ width: '56px', height: '56px', background: 'white', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0f172a', marginBottom: '1.5rem', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
-                    <LayoutDashboard size={28} />
-                </div>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--text-main)' }}>HR Wellness Dashboard</h3>
-                <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', lineHeight: 1.6 }}>
-                    Understand adoption, participation, and wellbeing trends across teams. Spot burnout risk early with data-backed insights.
-                </p>
-            </div>
-        </div>
-    </div>
+    );
+};

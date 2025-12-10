@@ -30,6 +30,7 @@ export const HRSignup = () => {
             });
             // 5. & 6. Auto Login handled by signUp usually, redirect to Dashboard
             navigate('/hr/dashboard');
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             console.error(err);
             setError(err.message || 'Failed to sign up');

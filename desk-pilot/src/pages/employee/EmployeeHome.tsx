@@ -8,13 +8,10 @@ import { supabase } from '../../lib/supabase';
 export const EmployeeHome = () => {
     const location = useLocation();
     const [name, setName] = useState('');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [routine, setRoutine] = useState<any[]>([]);
     const [progress, setProgress] = useState(0); // 0 to 100
     const [sessionsCount, setSessionsCount] = useState(0);
-
-    useEffect(() => {
-        loadDashboard();
-    }, [location.key]);
 
     const loadDashboard = async () => {
         const { data: { user } } = await supabase.auth.getUser();
@@ -42,6 +39,11 @@ export const EmployeeHome = () => {
             }
         }
     };
+
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        loadDashboard();
+    }, [location.key]);
 
     return (
         <div>

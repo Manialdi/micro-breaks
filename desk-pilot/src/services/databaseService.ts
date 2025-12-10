@@ -252,7 +252,7 @@ export const dbService = {
             .single();
     },
 
-    async acceptInvitation({ token, name, password }: any) {
+    async acceptInvitation({ token, name, password }: { token: string, name: string, password: string }) {
         // 1. Verify Invite
         const { data: invite, error: inviteError } = await this.getInvitation(token);
         if (inviteError || !invite) throw new Error('Invalid or expired invitation');
@@ -391,11 +391,12 @@ export const dbService = {
                 const yesterdayStr = yesterday.toISOString().split('T')[0];
 
                 // If they did it today, streak starts. If not today but yesterday, streak is alive.
-                let currentDate = dates[0];
+                const currentDate = dates[0];
                 // Check if streak is active (today or yesterday)
+                // check if streak is active (today or yesterday)
                 if (currentDate === todayStr || currentDate === yesterdayStr) {
                     streak = 1;
-                    let checkDate = new Date(currentDate);
+                    const checkDate = new Date(currentDate);
 
                     // Iterate backwards checking for consecutive days
                     for (let i = 1; i < dates.length; i++) {
@@ -482,10 +483,10 @@ export const dbService = {
                 yesterday.setDate(yesterday.getDate() - 1);
                 const yesterdayStr = yesterday.toISOString().split('T')[0];
 
-                let currentDate = dates[0];
+                const currentDate = dates[0];
                 if (currentDate === todayStr || currentDate === yesterdayStr) {
                     streak = 1;
-                    let checkDate = new Date(currentDate);
+                    const checkDate = new Date(currentDate);
                     for (let i = 1; i < dates.length; i++) {
                         checkDate.setDate(checkDate.getDate() - 1);
                         const checkStr = checkDate.toISOString().split('T')[0];
@@ -656,7 +657,7 @@ export const dbService = {
 
             if (dates[0] === todayStr || dates[0] === yesterdayStr) {
                 streak = 1;
-                let checkDate = new Date(dates[0]);
+                const checkDate = new Date(dates[0]);
                 for (let i = 1; i < dates.length; i++) {
                     checkDate.setDate(checkDate.getDate() - 1);
                     if (dates[i] === checkDate.toISOString().split('T')[0]) {
@@ -681,6 +682,7 @@ export const dbService = {
         // --- TABLE: Exercise Breakdown ---
         const breakdownMap = new Map<string, { name: string, count: number, lastAt: string }>();
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         logs.forEach((log: any) => {
             const exName = log.exercises?.name || 'Unknown Exercise';
             if (!breakdownMap.has(exName)) {

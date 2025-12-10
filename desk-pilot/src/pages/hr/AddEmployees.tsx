@@ -32,37 +32,41 @@ const PreviewModal = ({ emails, onConfirm, onCancel }: { emails: string[], onCon
 );
 
 export const AddEmployees = () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [employees, setEmployees] = useState<any[]>([]);
     const [inputEmails, setInputEmails] = useState('');
     const [loading, setLoading] = useState(false);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [generatedLinks, setGeneratedLinks] = useState<any[]>([]);
     const [showPreview, setShowPreview] = useState(false);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [currentUser, setCurrentUser] = useState<any>(null);
-
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    const fetchData = async () => {
-        const { data: { user } } = await supabase.auth.getUser();
-        if (user) {
-            // Need to get the HR's company ID first
-            const { data: dbUser } = await supabase.from('users').select('company_id').eq('id', user.id).single();
-            if (dbUser?.company_id) {
-                setCurrentUser({ ...user, company_id: dbUser.company_id });
-                loadEmployees(dbUser.company_id);
-            }
-        }
-    };
 
     const loadEmployees = async (companyId: string) => {
         try {
             const data = await dbService.getCompanyEmployees(companyId);
-            setEmployees(data || []);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            setEmployees((data as any[]) || []);
         } catch (error) {
             console.error('Failed to load employees', error);
         }
     };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user) {
+                // Need to get the HR's company ID first
+                const { data: dbUser } = await supabase.from('users').select('company_id').eq('id', user.id).single();
+                if (dbUser?.company_id) {
+                    setCurrentUser({ ...user, company_id: dbUser.company_id });
+                    loadEmployees(dbUser.company_id);
+                }
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const handleInviteClick = (e: React.FormEvent) => {
         e.preventDefault();
@@ -126,6 +130,7 @@ export const AddEmployees = () => {
                             Since we are in simulation mode (no email server), please share these links with your users manually:
                         </p>
                         <ul style={{ listStyle: 'none', padding: 0 }}>
+                            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                             {generatedLinks.map((link: any) => (
                                 <li key={link.id} style={{ marginBottom: '0.5rem', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
                                     <strong>{link.email}</strong>

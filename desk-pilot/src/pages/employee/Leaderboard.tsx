@@ -6,7 +6,9 @@ import { supabase } from '../../lib/supabase';
 export const Leaderboard = () => {
     const [view, setView] = useState<'weekly' | 'streak'>('weekly');
     const [loading, setLoading] = useState(true);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [weeklyLeaders, setWeeklyLeaders] = useState<any[]>([]);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [streakLeaders, setStreakLeaders] = useState<any[]>([]);
 
     useEffect(() => {

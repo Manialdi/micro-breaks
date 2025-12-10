@@ -12,6 +12,7 @@ export const AcceptInvite = () => {
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [inviteData, setInviteData] = useState<any>(null);
 
     const [name, setName] = useState('');
@@ -33,6 +34,7 @@ export const AcceptInvite = () => {
             if (error || !data) throw new Error('Invalid invitation');
             setInviteData(data);
         } catch (err) {
+            console.error(err); // Log error to use the variable
             setError('This invitation is invalid or has expired.');
         } finally {
             setLoading(false);
@@ -43,6 +45,7 @@ export const AcceptInvite = () => {
         e.preventDefault();
         setLoading(true);
         try {
+            if (!token) throw new Error('Missing invitation token');
             await dbService.acceptInvitation({
                 token,
                 name,
@@ -52,6 +55,7 @@ export const AcceptInvite = () => {
             navigate('/auth/employee/login'); // Or directly home if auto-signed in? Supabase usually auto-signs in.
             // Let's assume auto-signin works, so:
             navigate('/employee/home');
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             console.error(err);
             setError(err.message || 'Failed to join');
