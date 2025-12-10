@@ -1,7 +1,7 @@
 export const HowItWorks = () => {
     return (
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '3rem' }}>How DeskPilot Works</h1>
+            <h1 style={{ textAlign: 'center', marginBottom: '3rem' }}>How Micro-Breaks Works</h1>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
                 <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
@@ -30,7 +30,7 @@ export const HowItWorks = () => {
                     <div>
                         <h3>Get Moving</h3>
                         <p style={{ color: 'var(--text-muted)' }}>
-                            DeskPilot reminds team members to take scheduled microbreaks with
+                            Micro-Breaks reminds team members to take scheduled microbreaks with
                             guided exercises like neck stretches, desk yoga, and eye relaxation.
                         </p>
                     </div>

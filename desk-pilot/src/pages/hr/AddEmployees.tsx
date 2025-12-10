@@ -15,10 +15,10 @@ const PreviewModal = ({ emails, onConfirm, onCancel }: { emails: string[], onCon
             <h3>Preview Invite Email</h3>
             <div style={{ margin: '1rem 0', padding: '1rem', backgroundColor: '#f8fafc', borderRadius: '4px', fontSize: '0.9rem' }}>
                 <p><strong>To:</strong> {emails.join(', ')}</p>
-                <p><strong>Subject:</strong> You're invited to join DeskPilot!</p>
+                <p><strong>Subject:</strong> You're invited to join Micro-Breaks!</p>
                 <hr style={{ margin: '0.5rem 0', borderColor: '#e2e8f0' }} />
                 <p>Hello,</p>
-                <p>Your company has invited you to join DeskPilot to improve workplace wellness.</p>
+                <p>Your company has invited you to join Micro-Breaks to improve workplace wellness.</p>
                 <p>Click the link below to set up your account:</p>
                 <p style={{ color: 'blue', textDecoration: 'underline' }}>{window.location.origin}/join?token=&lt;UNIQUE_TOKEN&gt;</p>
                 <p>Temporary Password: <strong>Welcome2025!</strong></p>

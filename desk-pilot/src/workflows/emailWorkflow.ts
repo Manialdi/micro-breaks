@@ -28,11 +28,11 @@ export async function sendBreakEmailReminder(supabase: SupabaseClient, userId: s
     }
 
     // 2. Generate Email Content
-    const subject = `[DeskPilot] Time for your microbreak`;
+    const subject = `[Micro-Breaks] Time for your microbreak`;
     const body = `
 Hi ${user.name},
 
-It’s time for your quick DeskPilot routine.
+It’s time for your quick Micro-Breaks routine.
 Click below to complete today’s set.
 
 Link: https://yourapp.com/employee/home

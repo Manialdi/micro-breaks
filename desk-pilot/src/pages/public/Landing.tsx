@@ -111,7 +111,7 @@ export const Landing = () => {
 
 
             <div style={{ marginTop: '4rem' }}>
-                <h2 style={{ fontSize: '2rem', marginBottom: '2rem' }}>Why DeskPilot?</h2>
+                <h2 style={{ fontSize: '2rem', marginBottom: '2rem' }}>Why Micro-Breaks?</h2>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem', textAlign: 'left' }}>
                     <div>
                         <h3 style={{ color: 'var(--primary)' }}>Easy Setup</h3>
