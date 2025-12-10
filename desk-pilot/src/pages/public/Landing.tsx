@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Button } from '../../components/common/Button';
-import { Activity, Zap, BarChart3, ArrowRight } from 'lucide-react';
+import { Activity, Zap, BarChart3, ArrowRight, Users, Globe } from 'lucide-react';
 
 export const Landing = () => {
     return (
@@ -110,20 +110,77 @@ export const Landing = () => {
             {/* Existing 'Why DeskPilot' section kept but styled to match if needed, can serve as features below fold */}
 
 
-            <div style={{ marginTop: '4rem' }}>
-                <h2 style={{ fontSize: '2rem', marginBottom: '2rem' }}>Why Micro-Breaks?</h2>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem', textAlign: 'left' }}>
-                    <div>
-                        <h3 style={{ color: 'var(--primary)' }}>Easy Setup</h3>
-                        <p style={{ color: 'var(--text-muted)' }}>Get your whole team onboarded in minutes using our simple HR dashboard.</p>
+            {/* Problem & Solution Section */}
+            <div style={{ marginTop: '8rem', textAlign: 'center' }}>
+                <h2 style={{
+                    fontSize: '2.5rem',
+                    fontWeight: 800,
+                    color: 'var(--text-main)',
+                    marginBottom: '1rem',
+                    maxWidth: '800px',
+                    marginLeft: 'auto',
+                    marginRight: 'auto'
+                }}>
+                    Your team sits all day. Their bodies weren’t designed for it.
+                </h2>
+                <p style={{
+                    fontSize: '1.25rem',
+                    color: 'var(--text-muted)',
+                    maxWidth: '700px',
+                    margin: '0 auto 4rem',
+                    lineHeight: 1.6
+                }}>
+                    Long periods of sitting lead to stiffness, eye strain, and burnout. Micro Breaks introduces simple wellness habits throughout the day without requiring another heavy program.
+                </p>
+
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                    gap: '2rem',
+                    textAlign: 'left'
+                }}>
+                    {/* Card 1 */}
+                    <div style={{ padding: '2rem', background: 'white', borderRadius: '16px', border: '1px solid var(--border)', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
+                        <div style={{ width: '48px', height: '48px', background: '#ecfdf5', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#059669', marginBottom: '1.5rem' }}>
+                            <Activity size={24} />
+                        </div>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.75rem', color: 'var(--text-main)' }}>Less pain, more comfort</h3>
+                        <p style={{ color: 'var(--text-muted)', lineHeight: 1.5 }}>
+                            Gentle micro stretches reduce neck, shoulder, and back strain before it becomes a problem.
+                        </p>
                     </div>
-                    <div>
-                        <h3 style={{ color: 'var(--primary)' }}>Guided Exercises</h3>
-                        <p style={{ color: 'var(--text-muted)' }}>Curated library of 2-minute exercises designed for the office environment.</p>
+
+                    {/* Card 2 */}
+                    <div style={{ padding: '2rem', background: 'white', borderRadius: '16px', border: '1px solid var(--border)', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
+                        <div style={{ width: '48px', height: '48px', background: '#fffbeb', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d97706', marginBottom: '1.5rem' }}>
+                            <Zap size={24} />
+                        </div>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.75rem', color: 'var(--text-main)' }}>Sharper focus, better work</h3>
+                        <p style={{ color: 'var(--text-muted)', lineHeight: 1.5 }}>
+                            Short, active breaks improve attention span and mental clarity for complex tasks.
+                        </p>
                     </div>
-                    <div>
-                        <h3 style={{ color: 'var(--primary)' }}>Track Progress</h3>
-                        <p style={{ color: 'var(--text-muted)' }}>Monitor engagement and improved wellness metrics across the organization.</p>
+
+                    {/* Card 3 */}
+                    <div style={{ padding: '2rem', background: 'white', borderRadius: '16px', border: '1px solid var(--border)', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
+                        <div style={{ width: '48px', height: '48px', background: '#eff6ff', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#2563eb', marginBottom: '1.5rem' }}>
+                            <Users size={24} />
+                        </div>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.75rem', color: 'var(--text-main)' }}>Healthier culture</h3>
+                        <p style={{ color: 'var(--text-muted)', lineHeight: 1.5 }}>
+                            Build trust and engagement by showing your team you genuinely care about their wellbeing.
+                        </p>
+                    </div>
+
+                    {/* Card 4 */}
+                    <div style={{ padding: '2rem', background: 'white', borderRadius: '16px', border: '1px solid var(--border)', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
+                        <div style={{ width: '48px', height: '48px', background: '#f5f3ff', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#7c3aed', marginBottom: '1.5rem' }}>
+                            <Globe size={24} />
+                        </div>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.75rem', color: 'var(--text-main)' }}>Wellness that scales</h3>
+                        <p style={{ color: 'var(--text-muted)', lineHeight: 1.5 }}>
+                            Works seamlessly across different office locations, remote teams, and time zones.
+                        </p>
                     </div>
                 </div>
             </div>
