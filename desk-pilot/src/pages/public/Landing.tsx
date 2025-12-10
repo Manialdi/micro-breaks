@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Button } from '../../components/common/Button';
-import { Activity, Zap, BarChart3, ArrowRight, Users, Globe } from 'lucide-react';
+import { Activity, Zap, BarChart3, ArrowRight, Users, Globe, Bell, PlayCircle, LayoutDashboard } from 'lucide-react';
 
 export const Landing = () => {
     return (
